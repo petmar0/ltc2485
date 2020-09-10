@@ -110,6 +110,8 @@ int8_t LTC2485_read(uint8_t i2c_address, uint8_t adc_command, int32_t *adc_code,
 }
 
 void setup() {
+    Serial.begin(9600);
+
     Wire.begin();
 }
 
