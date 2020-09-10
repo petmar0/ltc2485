@@ -81,7 +81,7 @@ int8_t LTC2485_read(uint8_t i2c_address, uint8_t adc_command, int32_t *adc_code,
         if (!ack) {
             break; // !ack indicates success
         }
-        if (timer_count++>eoc_timeout) {     // If timeout, return 1 (failure)
+        if (timer_count++ > eoc_timeout) {     // If timeout, return 1 (failure)
             return 1;
         }
         else {
@@ -115,6 +115,18 @@ void setup() {
 
 void loop() {
     while (true) {
+        uint8_t config = LTC2485_R50 | LTC2485_SPEED_1X;
+        uint16_t timeout = 50;
+        int32_t adc = 0;
+
+        int8_t rv = LTC2485_read(LTC2485_I2C_GLOBAL_ADDRESS, config, &adc, timeout);
+
+        Serial.print("adc: rv=");
+        Serial.print(rv);
+        Serial.print(" adc=");
+        Serial.print(adc);
+        Serial.println();
+
         delay(1000);
     }
 }
