@@ -77,6 +77,8 @@ int8_t LTC2485_read(uint8_t i2c_address, uint8_t adc_command, int32_t *adc_code,
     LT_union_int32_4bytes data;
 
     while (1) {
+        Serial.println("reading");
+
         ack = i2c_read_block_data(i2c_address, adc_command, 4, data.LT_byte);
         if (!ack) {
             break; // !ack indicates success
