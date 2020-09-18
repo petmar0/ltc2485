@@ -1,0 +1,22 @@
+#!/bin/bash
+
+BOOTLOADER=bootloader-feather_m0-v3.10.0.bin
+DEVICE=ATSAMD21G18
+
+BOOTLOADER=bootloader-grandcentral_m4-v3.10.0.bin
+DEVICE=ATSAMD51P20
+
+JLinkExe -if SWD -device $DEVICE -speed 4000 <<EOF
+exitonerror 1
+connect
+h
+sleep 100
+r
+sleep 100
+loadfile $BOOTLOADER,0x0000
+sleep 100
+r
+sleep 100
+go
+q
+EOF

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DEVICE=ATSAMD21G18
+APP=build/m0/test.bin
+BASE="0x2000"
+
+DEVICE=ATSAMD51P20
+APP=build/m4-gc/test.bin
+BASE="0x4000"
+
+JLinkExe -if SWD -device $DEVICE -speed 4000 <<EOF
+exitonerror 1
+connect
+h
+sleep 100
+r
+sleep 100
+loadfile $APP,$BASE
+sleep 100
+r
+sleep 100
+go
+q
+EOF
